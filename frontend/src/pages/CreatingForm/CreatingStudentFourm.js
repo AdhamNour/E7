@@ -1,23 +1,81 @@
-import React from 'react';
-import {TextField,Button} from '@material-ui/core';
-import { Send } from '@material-ui/icons';
+import React, { useState } from "react";
+import { TextField, Button } from "@material-ui/core";
+import { Send } from "@material-ui/icons";
+import validator from "validator";
 
-import classes from './CreatingForm.module.css'
+import classes from "./CreatingForm.module.css";
 const CreatingStudentForm = () => {
-    return ( <div className={classes.MainDiv} >
-        <TextField
-          label="ٍStudent Name"
-          variant="outlined"
-        />
-        <TextField
-          label="Student Code"
-          variant="outlined"
-        />
-        
-        <Button variant="contained" color="primary" endIcon={<Send />} >
+  const [StudentName, setStudentName] = useState("");
+  const [StudentCode, setStudentCode] = useState("");
+  const [StudentNameError, setStudentNameError] = useState("");
+  const [StudentCodeError, setStudentCodeError] = useState("");
+
+  const StudentNameHandler = (event) => {
+    let data = event.target.value;
+    let test =
+      validator.isAlpha(data) ||
+      validator.isAlpha(data.replace(/'/g, "")) ||
+      validator.isAlpha(data.replace(/-/g, ""))||validator.isAlpha(data.replace(/ /g, ""));
+    if (!test) {
+      setStudentNameError("invalid User Name");
+    } else {
+      setStudentNameError("");
+    }
+    setStudentName(data);
+  };
+
+  const StudentCodeHandler = (event) => {
+    const data = event.target.value;
+    if (data.length > 7) {
+      return;
+    }
+    if (data.length < 7) {
+      setStudentCodeError("must match 7 characters.");
+    } else {
+      setStudentCodeError("");
+    }
+    setStudentCode(data);
+  };
+
+  const SendHandler = () => {
+    let x = true;
+    if (StudentName.length === 0) {
+      x = false;
+      setStudentNameError("This Field is Required");
+    }
+    if (StudentCode.length === 0) {
+      x = false;
+      setStudentCodeError("This Field is Required");
+    }
+    if(x) {
+        alert("Being Sent")
+    }
+  };
+
+  return (
+    <div className={classes.MainDiv}>
+      <TextField
+        label="ٍStudent Name"
+        variant="outlined"
+        value={StudentName}
+        onChange={StudentNameHandler}
+        error={StudentNameError !== ""}
+        helperText={StudentNameError}
+      />
+      <TextField
+        label="Student Code"
+        variant="outlined"
+        value={StudentCode}
+        onChange={StudentCodeHandler}
+        error={StudentCodeError !== ""}
+        helperText={StudentCodeError}
+      />
+
+      <Button variant="contained" color="primary" endIcon={<Send />} onClick ={SendHandler} >
         Send
       </Button>
-    </div> );
-}
- 
+    </div>
+  );
+};
+
 export default CreatingStudentForm;

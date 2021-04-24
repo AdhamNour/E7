@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Icon } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 
 import classes from "./CreatingForm.module.css";
