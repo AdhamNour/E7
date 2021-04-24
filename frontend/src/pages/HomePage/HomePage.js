@@ -7,7 +7,6 @@ const HomePage = (props) => {
         <Button variant="contained"  color="primary" onClick={props.ccm} > Create Course </Button>
         <Button variant="contained" color="secondary" onClick={props.csm}  > Create Student </Button>
         <Button variant="contained"  color="primary" onClick={props.sacm} > Create All Courses </Button>
-
         <Button variant="contained" color="secondary" onClick={props.sasm}  > Show All Student </Button>
 
       </div>

@@ -1,23 +1,33 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
+import { Button } from "@material-ui/core";
+import axios from "axios";
+
 import classes from "./MainScreen.module.css";
 import HomePage from "../../pages/HomePage/HomePage";
-
 import CreatingCourseForm from "../../pages/CreatingForm/CreatingCourseForm";
 import CreatingStudentForm from "../../pages/CreatingForm/CreatingStudentFourm";
-import AccordionDataShow from '../../pages/AccordionDataShow/AccordionDataShow'
+import AccordionDataShow from "../../pages/AccordionDataShow/AccordionDataShow";
 
-import { Button } from "@material-ui/core";
 const MainScreen = () => {
   const [creatingCourseMode, setcreatingCourseMode] = useState(false);
   const [createStudentMode, setcreateStudentMode] = useState(false);
   const [ShowAllCoursesMode, setShowAllCoursesMode] = useState(false);
   const [ShowAllStudentsMode, setShowAllStudentsMode] = useState(false);
+  let Data = useRef() ;
 
   let mainPageContent = (
     <HomePage
       ccm={() => setcreatingCourseMode(true)}
       csm={() => setcreateStudentMode(true)}
-      sacm={() => setShowAllCoursesMode(true)}
+      sacm={() =>
+        axios
+          .get("http://localhost:4000/api/courses")
+          .then((result) => {
+             console.log(result.data);
+             Data.current=result.data;
+             setShowAllCoursesMode(true);
+          })
+      }
       sasm={() => setShowAllStudentsMode(true)}
     />
   );
@@ -31,15 +41,20 @@ const MainScreen = () => {
     document.title = "Creating Student";
   }
   if (ShowAllCoursesMode) {
-    mainPageContent = <AccordionDataShow link="/api/courses" />;
+    mainPageContent = <AccordionDataShow data={Data.current} />;
     document.title = "All Courses";
   }
   if (ShowAllStudentsMode) {
-    mainPageContent = <AccordionDataShow link="/api/students" />;
+    mainPageContent = <AccordionDataShow data={Data.current} />;
     document.title = "All Students";
   }
   let resetButton = null;
-  if (createStudentMode || creatingCourseMode || ShowAllStudentsMode||ShowAllCoursesMode) {
+  if (
+    createStudentMode ||
+    creatingCourseMode ||
+    ShowAllStudentsMode ||
+    ShowAllCoursesMode
+  ) {
     resetButton = (
       <Button
         variant="contained"
@@ -47,7 +62,7 @@ const MainScreen = () => {
           setcreatingCourseMode(false);
           setcreateStudentMode(false);
           setShowAllStudentsMode(false);
-          setShowAllCoursesMode(false)
+          setShowAllCoursesMode(false);
         }}
       >
         Reset

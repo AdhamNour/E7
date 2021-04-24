@@ -54,7 +54,9 @@ const AccordionItem = (props) => {
       </AccordionSummary>
       <AccordionDetails>
         <div className={clss.DetailsContainer}>
-          {content.map((item,index) => <Typography key={index} >{item}</Typography>)}
+          {content.map((item, index) => (
+            <Typography key={index}>{item}</Typography>
+          ))}
         </div>
       </AccordionDetails>
     </Accordion>
