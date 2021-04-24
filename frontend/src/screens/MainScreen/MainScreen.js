@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import classes from "./MainScreen.module.css";
 import HomePage from "../../pages/HomePage/HomePage";
 
-import CreatingCourseForm from '../../pages/CreatingForm/CreatingCourseForm';
-import CreatingStudentForm from '../../pages/CreatingForm/CreatingStudentFourm';
+import CreatingCourseForm from "../../pages/CreatingForm/CreatingCourseForm";
+import CreatingStudentForm from "../../pages/CreatingForm/CreatingStudentFourm";
 
 import { Button } from "@material-ui/core";
 const MainScreen = () => {
@@ -15,11 +15,14 @@ const MainScreen = () => {
       csm={() => setcreateStudentMode(true)}
     />
   );
+  document.title = "Home Page";
   if (creatingCourseMode) {
     mainPageContent = <CreatingCourseForm />;
+    document.title = "Creating Course";
   }
   if (createStudentMode) {
     mainPageContent = <CreatingStudentForm />;
+    document.title = "Creating Student";
   }
   let resetButton = null;
   if (createStudentMode || creatingCourseMode) {

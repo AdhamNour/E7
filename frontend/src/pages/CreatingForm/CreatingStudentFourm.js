@@ -1,5 +1,7 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import {TextField,Button} from '@material-ui/core';
+import { Send } from '@material-ui/icons';
+
 import classes from './CreatingForm.module.css'
 const CreatingStudentForm = () => {
     return ( <div className={classes.MainDiv} >
@@ -12,7 +14,9 @@ const CreatingStudentForm = () => {
           variant="outlined"
         />
         
-
+        <Button variant="contained" color="primary" endIcon={<Send />} >
+        Send
+      </Button>
     </div> );
 }
  
