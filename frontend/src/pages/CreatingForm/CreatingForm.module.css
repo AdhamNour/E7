@@ -1,0 +1,7 @@
+.MainDiv{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    height:40%;
+    width:80%;
+}
