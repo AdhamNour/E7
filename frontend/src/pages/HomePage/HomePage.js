@@ -6,6 +6,10 @@ const HomePage = (props) => {
         <div className={classes.ButtonsContainer}>
         <Button variant="contained"  color="primary" onClick={props.ccm} > Create Course </Button>
         <Button variant="contained" color="secondary" onClick={props.csm}  > Create Student </Button>
+        <Button variant="contained"  color="primary"  > Create All Courses </Button>
+
+        <Button variant="contained" color="secondary"   > Show All Student </Button>
+
       </div>
      );
 }

@@ -9,10 +9,15 @@ import { Button } from "@material-ui/core";
 const MainScreen = () => {
   const [creatingCourseMode, setcreatingCourseMode] = useState(false);
   const [createStudentMode, setcreateStudentMode] = useState(false);
+  const [ShowAllCoursesMode, setShowAllCoursesMode] = useState(false);
+  const [ShowAllStudentsMode, setShowAllStudentsMode] = useState(false);
+
   let mainPageContent = (
     <HomePage
       ccm={() => setcreatingCourseMode(true)}
       csm={() => setcreateStudentMode(true)}
+      sacm={() => setShowAllCoursesMode(true)}
+      sasm={() => setShowAllStudentsMode(true)}
     />
   );
   document.title = "Home Page";
