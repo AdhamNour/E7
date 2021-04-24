@@ -78,5 +78,11 @@ app.post("/api/students", (req, res) => {
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
 });
+app.get("/web/courses/create", function (req, res) {
+  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+});
+app.get("/web/students/create", function (req, res) {
+  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+});
 
 app.listen(4000);
