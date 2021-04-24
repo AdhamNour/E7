@@ -54,7 +54,10 @@ const CreatingCourseForm = () => {
           CourseName: CourseNameValue,
           Discription: CourseDiscription,
         })
-        .then((response) => console.log(response));
+        .then((response) => {
+          alert("Courses update Sucessfully")
+          console.log(response);
+        });
     }
   };
 

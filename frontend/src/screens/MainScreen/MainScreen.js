@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 
@@ -13,22 +13,26 @@ const MainScreen = () => {
   const [createStudentMode, setcreateStudentMode] = useState(false);
   const [ShowAllCoursesMode, setShowAllCoursesMode] = useState(false);
   const [ShowAllStudentsMode, setShowAllStudentsMode] = useState(false);
-  let Data = useRef() ;
+  let Data = useRef();
 
   let mainPageContent = (
     <HomePage
       ccm={() => setcreatingCourseMode(true)}
       csm={() => setcreateStudentMode(true)}
       sacm={() =>
-        axios
-          .get("http://localhost:4000/api/courses")
-          .then((result) => {
-             console.log(result.data);
-             Data.current=result.data;
-             setShowAllCoursesMode(true);
-          })
+        axios.get("http://localhost:4000/api/courses").then((result) => {
+          console.log(result.data);
+          Data.current = result.data;
+          setShowAllCoursesMode(true);
+        })
       }
-      sasm={() => setShowAllStudentsMode(true)}
+      sasm={() =>
+        axios.get("http://localhost:4000/api/students").then((result) => {
+          console.log(result.data);
+          Data.current = result.data;
+          setShowAllStudentsMode(true);
+        })
+      }
     />
   );
   document.title = "Home Page";

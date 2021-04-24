@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 import validator from "validator";
+import axios from "axios";
 
 import classes from "./CreatingForm.module.css";
 const CreatingStudentForm = () => {
@@ -15,7 +16,8 @@ const CreatingStudentForm = () => {
     let test =
       validator.isAlpha(data) ||
       validator.isAlpha(data.replace(/'/g, "")) ||
-      validator.isAlpha(data.replace(/-/g, ""))||validator.isAlpha(data.replace(/ /g, ""));
+      validator.isAlpha(data.replace(/-/g, "")) ||
+      validator.isAlpha(data.replace(/ /g, ""));
     if (!test) {
       setStudentNameError("invalid User Name");
     } else {
@@ -47,8 +49,16 @@ const CreatingStudentForm = () => {
       x = false;
       setStudentCodeError("This Field is Required");
     }
-    if(x) {
-        alert("Being Sent")
+    if (x) {
+      axios
+        .post("http://localhost:4000/api/students", {
+          StudentCode: StudentCode,
+          StudentName: StudentName,
+        })
+        .then((response) => {
+          alert("student updated successfully");
+          console.log(response);
+        });
     }
   };
 
@@ -71,7 +81,12 @@ const CreatingStudentForm = () => {
         helperText={StudentCodeError}
       />
 
-      <Button variant="contained" color="primary" endIcon={<Send />} onClick ={SendHandler} >
+      <Button
+        variant="contained"
+        color="primary"
+        endIcon={<Send />}
+        onClick={SendHandler}
+      >
         Send
       </Button>
     </div>
