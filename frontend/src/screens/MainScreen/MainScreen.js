@@ -20,14 +20,14 @@ const MainScreen = () => {
       ccm={() => setcreatingCourseMode(true)}
       csm={() => setcreateStudentMode(true)}
       sacm={() =>
-        axios.get("http://localhost:4000/api/courses").then((result) => {
+        axios.get("https://e7exp.herokuapp.com/api/courses").then((result) => {
           console.log(result.data);
           Data.current = result.data;
           setShowAllCoursesMode(true);
         })
       }
       sasm={() =>
-        axios.get("http://localhost:4000/api/students").then((result) => {
+        axios.get("https://e7exp.herokuapp.com/api/students").then((result) => {
           console.log(result.data);
           Data.current = result.data;
           setShowAllStudentsMode(true);

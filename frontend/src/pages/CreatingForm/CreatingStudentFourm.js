@@ -51,7 +51,7 @@ const CreatingStudentForm = () => {
     }
     if (x) {
       axios
-        .post("http://localhost:4000/api/students", {
+        .post("https://e7exp.herokuapp.com/api/students", {
           StudentCode: StudentCode,
           StudentName: StudentName,
         })
