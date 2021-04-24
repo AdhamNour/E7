@@ -1,0 +1,4 @@
+.DetailsContainer {
+    display: flex;
+    flex-direction: column;
+}
