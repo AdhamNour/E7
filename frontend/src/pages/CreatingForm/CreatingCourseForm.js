@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
+import axios from "axios";
 
 import classes from "./CreatingForm.module.css";
 
@@ -47,7 +48,13 @@ const CreatingCourseForm = () => {
       setCourseNameError("This Field is required");
     }
     if (x) {
-      alert("sending...");
+      axios
+        .post("http://localhost:4000/api/courses", {
+          CourseCode: CourseCodeValue,
+          CourseName: CourseNameValue,
+          Discription: CourseDiscription,
+        })
+        .then((response) => console.log(response));
     }
   };
 
@@ -78,7 +85,12 @@ const CreatingCourseForm = () => {
           setCourseDiscription(e.target.value);
         }}
       />
-      <Button variant="contained" color="primary" endIcon={<Send />} onClick={SendHandler} >
+      <Button
+        variant="contained"
+        color="primary"
+        endIcon={<Send />}
+        onClick={SendHandler}
+      >
         Send
       </Button>
     </div>
