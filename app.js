@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.use(express.json());
 
-const courses = [
+let courses = [
   {
     id: 1,
     CourseCode: "CSE412",
@@ -35,7 +35,7 @@ const courses = [
   },
 ];
 
-const students = [
+let students = [
   { id: 1, StudentCode: "CSE412", StudnetName: "AN1" },
   { id: 2, StudentCode: "CSE411", StudnetName: "AN2" },
   { id: 3, StudentCode: "CSE415", StudnetName: "Multimedia Systems" },
@@ -65,6 +65,30 @@ app.post("/api/courses", (req, res) => {
   res.send(course);
 });
 
+app.put("/api/courses/", (req, res) => {
+  const courseID = req.body.id;
+  const selectedCourse = courses.find((course) => course.id === courseID);
+  if (req.body.CourseCode) {
+    selectedCourse.CourseCode = req.body.CourseCode;
+  }
+  if (req.body.CourseName) {
+    selectedCourse.CourseName = req.body.CourseName;
+  }
+  if (req.body.Discription) {
+    selectedCourse.Discription = req.body.Discription;
+  }
+  courses = [
+    ...courses.filter((course) => course.id !== courseID),
+    selectedCourse,
+  ];
+  res.send(selectedCourse);
+});
+
+app.delete("/api/courses/", (req, res) => {
+  courses = courses.filter((course) => course.id !== req.body.id);
+  res.send(courses);
+});
+
 app.post("/api/students", (req, res) => {
   const student = {
     id: students.length + 1,
@@ -73,6 +97,28 @@ app.post("/api/students", (req, res) => {
   };
   students.push(student);
   res.send(student);
+});
+
+app.put("/api/students/", (req, res) => {
+  const studentID = req.body.id;
+  const selectedStudent = students.find((student) => student.id === studentID);
+  if (req.body.StudentCode) {
+    selectedStudent.StudentCode = req.body.StudentCode;
+  }
+  if (req.body.StudentName) {
+    selectedStudent.StudentName = req.body.StudentName;
+  }
+
+  students = [
+    ...students.filter((student) => student.id !== studentID),
+    selectedStudent,
+  ];
+  res.send(selectedStudent);
+});
+
+app.delete("/api/students/", (req, res) => {
+  students = students.filter((student) => student.id !== req.body.id);
+  res.send(students);
 });
 
 app.get("/", function (req, res) {
@@ -85,5 +131,7 @@ app.get("/web/students/create", function (req, res) {
   res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
 });
 
-const PORT = process.env.PORT ||9000
-app.listen(PORT,() => {console.log(`listening to port ${PORT}`)});
+const PORT = process.env.PORT || 9000;
+app.listen(PORT, () => {
+  console.log(`listening to port ${PORT}`);
+});

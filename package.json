@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "startDev":"nodemon app.js",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
 
   },

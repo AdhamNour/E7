@@ -49,7 +49,7 @@ const CreatingCourseForm = () => {
     }
     if (x) {
       axios
-        .post("http://localhost:4000/api/courses", {
+        .post("https://e7exp.herokuapp.com/api/courses", {
           CourseCode: CourseCodeValue,
           CourseName: CourseNameValue,
           Discription: CourseDiscription,
